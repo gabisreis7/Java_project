@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import org.example.factory.ClienteFactory;
+
 public class Cliente {
 
         private Long id;
@@ -12,9 +14,6 @@ public class Cliente {
         private String endereco;
         private long numeroCnh;
 
-        public Cliente() {
-
-        }
 
     public Cliente(Long id, String nome, int idade, String email, String senha, long numeroCpf, long numeroRg, String endereco, long numeroCnh) {
         this.id = id;
@@ -28,20 +27,9 @@ public class Cliente {
         this.numeroCnh = numeroCnh;
     }
 
-    public Cliente(String email, String endereco, Long id, int idade, String nome, long numeroCnh, long numeroCpf, long numeroRg, String senha) {
-        this.email = email;
-        this.endereco = endereco;
-        this.id = id;
-        this.idade = idade;
-        this.nome = nome;
-        this.numeroCnh = numeroCnh;
-        this.numeroCpf = numeroCpf;
-        this.numeroRg = numeroRg;
-        this.senha = senha;
+
+    public Cliente(Long id, String nome, int idade, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh) {
     }
-
-
-
 
     public int getIdade() {
         return idade;
@@ -115,6 +103,10 @@ public class Cliente {
 
         public void setNumeroCnh(long numeroCnh) {
             this.numeroCnh = numeroCnh;
+        }
+
+        public static Cliente createCliente(Long id, String nome, int idade, String email, String senha, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh){
+            return new Cliente(id, nome, idade, numeroCpf, numeroRg, endereco, numeroCnh);
         }
 
 

@@ -2,9 +2,8 @@ package org.example.entities;
 
 public class Automovel {
 
-    private Long id;
     private String placaAutomovel;
-    private int marcaAutomovel;
+    private String marcaAutomovel;
     private String modeloAutomovel;
     private long numeroChassi;
     private long codigoRenavam;
@@ -12,24 +11,7 @@ public class Automovel {
     private String porteAutomovel;
 
 
-    public Automovel() {
-
-    }
-
-
-    public Automovel(int anoAutomovel, long codigoRenavam, Long id, int marcaAutomovel, String modeloAutomovel, long numeroChassi, String placaAutomovel, String porteAutomovel) {
-        this.anoAutomovel = anoAutomovel;
-        this.codigoRenavam = codigoRenavam;
-        this.id = id;
-        this.marcaAutomovel = marcaAutomovel;
-        this.modeloAutomovel = modeloAutomovel;
-        this.numeroChassi = numeroChassi;
-        this.placaAutomovel = placaAutomovel;
-        this.porteAutomovel = porteAutomovel;
-    }
-
-    public Automovel(String placaAutomovel, int marcaAutomovel, String modeloAutomovel, long numeroChassi,
-                     long codigoRenavam, int anoAutomovel, String porteAutomovel) {
+    public Automovel(String placaAutomovel, String marcaAutomovel, String modeloAutomovel, long numeroChassi, long codigoRenavam, int anoAutomovel, String porteAutomovel) {
         this.placaAutomovel = placaAutomovel;
         this.marcaAutomovel = marcaAutomovel;
         this.modeloAutomovel = modeloAutomovel;
@@ -37,15 +19,6 @@ public class Automovel {
         this.codigoRenavam = codigoRenavam;
         this.anoAutomovel = anoAutomovel;
         this.porteAutomovel = porteAutomovel;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getPlacaAutomovel() {
@@ -57,17 +30,13 @@ public class Automovel {
 
 
     public void setPlacaAutomovel(String placaAutomovel) {
-        if (placaAutomovel.length() != 7){
-            throw new IllegalArgumentException("Placa inexistente, deve possuir 7 caracteres");
-        }
-
         this.placaAutomovel = placaAutomovel;
     }
 
 
 
 
-    public int getMarcaAutomovel() {
+    public String getMarcaAutomovel() {
 
         return marcaAutomovel;
     }
@@ -75,7 +44,7 @@ public class Automovel {
 
 
 
-    public void setMarcaAutomovel(int marcaAutomovel) {
+    public void setMarcaAutomovel(String marcaAutomovel) {
 
         this.marcaAutomovel = marcaAutomovel;
     }
