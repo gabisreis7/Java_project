@@ -10,14 +10,14 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     private final Connection connection;
 
-    public AutomovelDaoImplementado(){
+    public AutomovelDaoImplementado(Connection connection){
         this.connection = connection;
     }
 
     @Override
     public void create(Automovel automovel) throws SQLException {
         String sql = "INSERT INTO T_VB_AUTOMOVEL(placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavam, anoAutomovel, porteAutomovel) " +
-                "VALUES (?,?,?,?,?,?,?";
+                "VALUES (?,?,?,?,?,?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, automovel.getPlacaAutomovel());
         pstmt.setString(2, automovel.getMarcaAutomovel());

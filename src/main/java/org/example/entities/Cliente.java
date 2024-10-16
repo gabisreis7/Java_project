@@ -1,10 +1,7 @@
 package org.example.entities;
 
-import org.example.factory.ClienteFactory;
-
 public class Cliente {
 
-        private Long id;
         private String nome;
         private int idade;
         private String email;
@@ -15,8 +12,7 @@ public class Cliente {
         private long numeroCnh;
 
 
-    public Cliente(Long id, String nome, int idade, String email, String senha, long numeroCpf, long numeroRg, String endereco, long numeroCnh) {
-        this.id = id;
+    public Cliente(String nome, int idade, String email, String senha, long numeroCpf, long numeroRg, String endereco, long numeroCnh) {
         this.nome = nome;
         this.idade = idade;
         this.email = email;
@@ -28,7 +24,7 @@ public class Cliente {
     }
 
 
-    public Cliente(Long id, String nome, int idade, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh) {
+    public Cliente(String nome, int idade, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh) {
     }
 
     public int getIdade() {
@@ -41,13 +37,6 @@ public class Cliente {
 
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
             return nome;
@@ -105,8 +94,8 @@ public class Cliente {
             this.numeroCnh = numeroCnh;
         }
 
-        public static Cliente createCliente(Long id, String nome, int idade, String email, String senha, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh){
-            return new Cliente(id, nome, idade, numeroCpf, numeroRg, endereco, numeroCnh);
+        public static Cliente createCliente(String nome, int idade, String email, String senha, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh){
+            return new Cliente(nome, idade, numeroCpf, numeroRg, endereco, numeroCnh);
         }
 
 
