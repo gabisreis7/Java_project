@@ -1,33 +1,22 @@
 package org.example.entities;
 
-import java.time.LocalDate;
+public class ManutencaoCorretiva implements Manutencao {
 
-public class Manutencao {
-
-    private int id;
-    private String tipoManutencao;
+    private String tipo;
     private String descricao;
     private String dataAgendamentoManutencao;
     private int horarioAgendamentoManutencao;
     private String enderecoCentroAutomotivo;
 
-    public Manutencao(int id, String tipoManutencao, String descricao, String dataAgendamentoManutencao, int horarioAgendamentoManutencao, String enderecoCentroAutomotivo) {
-        this.id = id;
-        this.tipoManutencao = tipoManutencao;
+    public ManutencaoCorretiva(String tipo, String descricao, String dataAgendamentoManutencao, int horarioAgendamentoManutencao, String enderecoCentroAutomotivo) {
+        this.tipo = tipo;
         this.descricao = descricao;
         this.dataAgendamentoManutencao = dataAgendamentoManutencao;
         this.horarioAgendamentoManutencao = horarioAgendamentoManutencao;
         this.enderecoCentroAutomotivo = enderecoCentroAutomotivo;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @Override
     public String getDataAgendamentoManutencao() {
         return dataAgendamentoManutencao;
     }
@@ -36,6 +25,7 @@ public class Manutencao {
         this.dataAgendamentoManutencao = dataAgendamentoManutencao;
     }
 
+    @Override
     public String getDescricao() {
         return descricao;
     }
@@ -44,6 +34,7 @@ public class Manutencao {
         this.descricao = descricao;
     }
 
+    @Override
     public String getEnderecoCentroAutomotivo() {
         return enderecoCentroAutomotivo;
     }
@@ -52,6 +43,7 @@ public class Manutencao {
         this.enderecoCentroAutomotivo = enderecoCentroAutomotivo;
     }
 
+    @Override
     public int getHorarioAgendamentoManutencao() {
         return horarioAgendamentoManutencao;
     }
@@ -60,20 +52,12 @@ public class Manutencao {
         this.horarioAgendamentoManutencao = horarioAgendamentoManutencao;
     }
 
-    public String getTipoManutencao() {
-        return tipoManutencao;
+    @Override
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoManutencao(String tipoManutencao) {
-        this.tipoManutencao = tipoManutencao;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
-
-    public void validarAgendamento() throws Exception {
-        LocalDate hoje = LocalDate.now();
-        LocalDate dataAgendada = LocalDate.parse(getDataAgendamentoManutencao());
-
-        if (dataAgendada.isBefore(hoje.plusDays(7))){
-            throw new Exception("A manutenção deve ser agendado em um prazo de 7 dias");
-        }
-        }
 }
