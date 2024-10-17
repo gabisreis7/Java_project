@@ -13,5 +13,7 @@ public interface ClienteDao {
 
     void update(Cliente cliente) throws SQLException;
 
-    void delete(String nome, int idade, String email, String senha, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh) throws SQLException;
+    void delete(int id) throws SQLException;
+
+    Cliente findId(int id) throws SQLException;
 }

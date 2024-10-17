@@ -2,6 +2,7 @@ package org.example.entities;
 
 public class Automovel {
 
+    private int id;
     private String placaAutomovel;
     private String marcaAutomovel;
     private String modeloAutomovel;
@@ -11,7 +12,8 @@ public class Automovel {
     private String porteAutomovel;
 
 
-    public Automovel(String placaAutomovel, String marcaAutomovel, String modeloAutomovel, long numeroChassi, long codigoRenavam, int anoAutomovel, String porteAutomovel) {
+    public Automovel(int id, String placaAutomovel, String marcaAutomovel, String modeloAutomovel, long numeroChassi, long codigoRenavam, int anoAutomovel, String porteAutomovel) {
+        this.id = id;
         this.placaAutomovel = placaAutomovel;
         this.marcaAutomovel = marcaAutomovel;
         this.modeloAutomovel = modeloAutomovel;
@@ -19,6 +21,19 @@ public class Automovel {
         this.codigoRenavam = codigoRenavam;
         this.anoAutomovel = anoAutomovel;
         this.porteAutomovel = porteAutomovel;
+    }
+
+    public Automovel() {
+
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPlacaAutomovel() {
@@ -30,6 +45,9 @@ public class Automovel {
 
 
     public void setPlacaAutomovel(String placaAutomovel) {
+        if (placaAutomovel.length() != 7){
+            throw new IllegalArgumentException("Placa inexistente, deve possuir 7 caracteres");
+        }
         this.placaAutomovel = placaAutomovel;
     }
 
@@ -93,6 +111,10 @@ public class Automovel {
 
 
     public void setCodigoRenavam(long codigoRenavam) {
+        String renavamstr = String.valueOf(codigoRenavam);
+        if (renavamstr.length() != 11){
+            throw new IllegalArgumentException("O código Renavam deve conter 11 dígitos numéricos");
+        }
 
         this.codigoRenavam = codigoRenavam;
     }
