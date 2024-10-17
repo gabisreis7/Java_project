@@ -1,16 +1,11 @@
 package org.example.teste;
 
 import org.example.ConexaoDbSingleton;
-import org.example.dao.AutomovelDao;
-import org.example.dao.AutomovelDaoImplementado;
-import org.example.dao.ClienteDao;
-import org.example.dao.ClienteDaoImplementado;
+import org.example.dao.*;
 import org.example.entities.Automovel;
 import org.example.entities.Cliente;
-import org.example.service.AutomovelService;
-import org.example.service.AutomovelServiceImpl;
-import org.example.service.ClienteService;
-import org.example.service.ClienteServiceImpl;
+import org.example.entities.Manutencao;
+import org.example.service.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -31,7 +26,7 @@ public class Main {
         scan = new Scanner(System.in);
         String nome, email, senha, endereco;
         long numeroCpf, numeroRg, numeroCnh;
-        System.out.println("Bem-vindo(a) à Mecânica Segura!");
+        System.out.println("Bem-vindo(a) à Mecânica Segura! O seu serviço exclusivo de agendamento mecânico");
         System.out.println("O primeiro passo para usufrir dos nossos serviços é fazer seu cadastro!");
         System.out.println("");
         System.out.println("Cadastro Pessoal");
@@ -141,7 +136,48 @@ public class Main {
         System.out.println("Informe a marca montadora: ");
         marcaAutomovel = scan.nextLine();
         automovel.setMarcaAutomovel(marcaAutomovel);
+        System.out.println("Informe o modelo: ");
+        modeloAutomovel = scan.nextLine();
+        automovel.setModeloAutomovel(modeloAutomovel);
+        System.out.println("Forneça o número de Chassi do automóvel: ");
+        numeroChassi = scan.nextLong();
+        automovel.setNumeroChassi(numeroChassi);
+        do {
+            System.out.println("Informe o código Renavam: ");
+            try {
+                codigoRenavam = scan.nextLong();
+                automovel.setCodigoRenavam(codigoRenavam);
+                scan.nextLine();
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + " Por favor, tente novamente...");
+            }
+        } while (true);
 
+        System.out.println("Informe o ano de fabricação: ");
+        anoAutomovel = scan.nextInt();
+        automovel.setAnoAutomovel(anoAutomovel);
+        System.out.println("Informe o porte do automóvel: ");
+        porteAutomovel = scan.nextLine();
+        automovel.setPorteAutomovel(porteAutomovel);
+
+
+        automovelService.salvarAutomovel(automovel);
+        automovel.mostrarCadastroAutomovel();
+
+        System.out.println("Perfeito, seu cadastro foi realizado com sucesso!");
+        System.out.println("Agora, precisamos que você forneça os dados do Seguro para que realizemos o serviço mecânico:");
+
+        //SEGURO
+
+        //PROBLEMA
+
+        ManutencaoDao manutencaoDao = ManutencaoDaoImplSingleton.getInstance(connection);
+
+        ManutencaoServiceFactory serviceFactory = new ManutencaoServiceFactory(manutencaoDao);
+        ManutencaoService manutencaoService = serviceFactory.criarManutencaoService();
+
+        System.out.println();
 
     }
 

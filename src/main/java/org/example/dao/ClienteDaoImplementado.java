@@ -17,17 +17,16 @@ public class ClienteDaoImplementado implements ClienteDao{
     @Override
     public void create(Cliente cliente) throws SQLException {
 
-        String sql = "INSERT INTO CLIENTE(id, nome, idade, email, senha, numeroCpf, numeroRg, endereco, numeroCnh) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO CLIENTE(nome, idade, email, senha, numeroCpf, numeroRg, endereco, numeroCnh) VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setInt(1, cliente.getId());
-        pstmt.setString(2, cliente.getNome());
-        pstmt.setInt(3, cliente.getIdade());
-        pstmt.setString(4, cliente.getEmail());
-        pstmt.setString(5, cliente.getSenha());
-        pstmt.setLong(6, cliente.getNumeroCpf());
-        pstmt.setLong(7, cliente.getNumeroRg());
-        pstmt.setString(8, cliente.getEndereco());
-        pstmt.setLong(9, cliente.getNumeroCnh());
+        pstmt.setString(1, cliente.getNome());
+        pstmt.setInt(2, cliente.getIdade());
+        pstmt.setString(3, cliente.getEmail());
+        pstmt.setString(4, cliente.getSenha());
+        pstmt.setLong(5, cliente.getNumeroCpf());
+        pstmt.setLong(6, cliente.getNumeroRg());
+        pstmt.setString(7, cliente.getEndereco());
+        pstmt.setLong(8, cliente.getNumeroCnh());
         pstmt.executeUpdate();
 
     }
@@ -35,7 +34,7 @@ public class ClienteDaoImplementado implements ClienteDao{
     @Override
     public List<Cliente> read() throws SQLException {
         List<Cliente> result = new ArrayList<>();
-        String sql = "SELECT * FROM CLIENTE";
+        String sql = "SELECT * FROM T_CLIENTE";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -58,7 +57,7 @@ public class ClienteDaoImplementado implements ClienteDao{
 
     @Override
     public void update(Cliente cliente) throws SQLException {
-        String sql = "UPDATE CLIENTE SET NOME=?, IDADE=?, EMAIL=?, SENHA=?, NUMEROCPF=?, NUMERORG=?, ENDERECO=?, NUMEROCNH=?";
+        String sql = "UPDATE T_CLIENTE SET id=?, nome=?, idade=?, email=?, senha=?, numeroCpf=?, numeroRg=?, endereco=?, numeroCnh=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(2, cliente.getNome());
         pstmt.setInt(3, cliente.getIdade());
@@ -75,14 +74,17 @@ public class ClienteDaoImplementado implements ClienteDao{
 
     @Override
     public void delete(int id) throws SQLException {
+        String sql = "DELETE T_CLIENTE WHERE id=?";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setInt(1, id);
 
+        pstmt.executeUpdate();
     }
 
     @Override
     public Cliente findId(int id) throws SQLException {
         Cliente clienteEncontrado = null;
-        List<Cliente> result = new ArrayList<>();
-        String sql = "SELECT * FROM CLIENTE WHERE id=?";
+        String sql = "SELECT * FROM T_CLIENTE WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
