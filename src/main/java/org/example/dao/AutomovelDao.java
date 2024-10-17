@@ -13,5 +13,7 @@ public interface AutomovelDao {
 
     void update(Automovel automovel) throws SQLException;
 
-    void delete(String placaAutomovel, String marcaAutomovel, String modeloAutomovel, Long numeroChassi, Long codigoRenavam, int ano, String porteAutomovel) throws SQLException;
+    void delete(int id) throws SQLException;
+
+    Automovel findId(int id) throws SQLException;
 }

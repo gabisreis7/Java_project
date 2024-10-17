@@ -2,6 +2,8 @@ package org.example.entities;
 
 public class Cliente {
 
+
+        private int id;
         private String nome;
         private int idade;
         private String email;
@@ -12,7 +14,8 @@ public class Cliente {
         private long numeroCnh;
 
 
-    public Cliente(String nome, int idade, String email, String senha, long numeroCpf, long numeroRg, String endereco, long numeroCnh) {
+    public Cliente(int id, String nome, int idade, String email, String senha, long numeroCpf, long numeroRg, String endereco, long numeroCnh) {
+        this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.email = email;
@@ -23,8 +26,17 @@ public class Cliente {
         this.numeroCnh = numeroCnh;
     }
 
+    public Cliente() {
 
-    public Cliente(String nome, int idade, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh) {
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIdade() {
@@ -32,6 +44,9 @@ public class Cliente {
     }
 
     public void setIdade(int idade){
+        if (idade < 18){
+            throw new IllegalArgumentException("O Cliente deve ser maior de idade");
+        }
 
         this.idade = idade;
 
@@ -67,7 +82,12 @@ public class Cliente {
         }
 
         public void setNumeroCpf(long numeroCpf) {
-            this.numeroCpf = numeroCpf;
+        String cpfstr = String.valueOf(numeroCpf);
+        if (cpfstr.length() != 11){
+            throw new IllegalArgumentException("O CPF deve ter 11 dígitos numéricos");
+        }
+
+        this.numeroCpf = numeroCpf;
         }
 
         public long getNumeroRg() {
@@ -75,8 +95,14 @@ public class Cliente {
         }
 
         public void setNumeroRg(long numeroRg) {
-            this.numeroRg = numeroRg;
+        String rgstr = String.valueOf(numeroRg);
+        if (rgstr.length() != 9){
+            throw new IllegalArgumentException("O RG deve ter 9 dígitos numéricos");
         }
+
+        this.numeroRg = numeroRg;
+        }
+
 
         public String getEndereco() {
             return endereco;
@@ -91,12 +117,14 @@ public class Cliente {
         }
 
         public void setNumeroCnh(long numeroCnh) {
+        String cnhstr = String.valueOf(numeroCnh);
+        if (cnhstr.length() != 11){
+            throw new IllegalArgumentException("A CNH deve ter 11 dígitos numéricos");
+        }
             this.numeroCnh = numeroCnh;
         }
 
-        public static Cliente createCliente(String nome, int idade, String email, String senha, Long numeroCpf, Long numeroRg, String endereco, Long numeroCnh){
-            return new Cliente(nome, idade, numeroCpf, numeroRg, endereco, numeroCnh);
-        }
+
 
 
         public void mostrarRegistroDados() {

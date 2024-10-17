@@ -13,5 +13,7 @@ public interface ManutencaoDao {
 
     void update(Manutencao manutencao) throws SQLException;
 
-    void delete(int id, String tipoManutencao, String descricao, String dataAgendamentoManutencao, int horarioAgendamentoManutencao, String enderecoCentroAutomotivo) throws SQLException;
+    void delete(int id) throws SQLException;
+
+    Manutencao findId(int id) throws SQLException;
 }
