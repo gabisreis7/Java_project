@@ -72,24 +72,38 @@ public class AutomovelDaoImplementado implements AutomovelDao{
     }
 
     @Override
-    public void delete(String placaAutomovel, String marcaAutomovel, String modeloAutomovel, Long numeroChassi, Long codigoRenavam, int anoAutomovel, String porteAutomovel) throws SQLException {
-        String sql = "DELETE T_VB_AUTOMOVEL WHERE PLACAAUTOMOVEL=?, MARCAAUTOMOVEL=?, MODELOAUTOMOVEL=?, NUMEROCHASSI=?, CODIGORENAVAM=?, ANOAUTOMOVEL=?, PORTEAUTOMOVEL=?";
+    public void delete(int id) throws SQLException {
+        String sql = "DELETE T_VB_AUTOMOVEL WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setString(1, placaAutomovel);
-        pstmt.setString(2, marcaAutomovel);
-        pstmt.setString(3, modeloAutomovel);
-        pstmt.setLong(4, numeroChassi);
-        pstmt.setLong(5, codigoRenavam);
-        pstmt.setInt(6, anoAutomovel);
-        pstmt.setString(7, porteAutomovel);
+        pstmt.setInt(1, id);
+
         pstmt.executeUpdate();
     }
 
+    @Override
+    public Automovel findId(int id) throws SQLException {
+        Automovel automovelEncontrado = null;
+        List<Automovel> result = new ArrayList<>();
+        String sql = "SELECT * FROM T_VB_AUTOMOVEL WHERE id=?";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
 
+        if (rs.next()){
+            String placaAutomovel = rs.getString("placaAutomovel");
+            String marcaAutomovel = rs.getString("marcaAutomovel");
+            String modeloAutomovel = rs.getString("modeloAutomovel");
+            Long numeroChassi = rs.getLong("numeroChassi");
+            Long codigoRenavem = rs.getLong("codigoRenavam");
+            int anoAutomovel = rs.getInt("anoAutomovel");
+            String porteAutomovel = rs.getString("porteAutomovel");
 
+            automovelEncontrado = new Automovel(id, placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavem, anoAutomovel, porteAutomovel);
 
+        }
 
-
+        return automovelEncontrado;
+    }
 
 
 }

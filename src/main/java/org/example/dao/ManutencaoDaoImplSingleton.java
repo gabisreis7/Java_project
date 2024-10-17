@@ -1,20 +1,32 @@
 package org.example.dao;
 
 import org.example.entities.Manutencao;
-import org.example.entities.ManutencaoCorretiva;
-import org.example.entities.ManutencaoPreventiva;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManutencaoDaoImplementado implements ManutencaoDao {
+public class ManutencaoDaoImplSingleton implements ManutencaoDao {
+
+    private static ManutencaoDaoImplSingleton instance;
 
     private final Connection connection;
 
-    public ManutencaoDaoImplementado(Connection connection) {
+
+    public ManutencaoDaoImplSingleton(Connection connection) {
         this.connection = connection;
     }
+
+
+    public static synchronized ManutencaoDaoImplSingleton getInstance(Connection connection){
+        if (instance == null){
+            instance = new ManutencaoDaoImplSingleton(connection);
+        }
+        return instance;
+    }
+
+
+
 
     @Override
     public void create(Manutencao manutencao) throws SQLException {
@@ -37,7 +49,7 @@ public class ManutencaoDaoImplementado implements ManutencaoDao {
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
-        while (rs.next()){
+        while (rs.next()) {
             int id = rs.getInt("id");
             String tipoManutencao = rs.getString("tipoManutencao");
             String descricao = rs.getString("descricao");
@@ -65,18 +77,34 @@ public class ManutencaoDaoImplementado implements ManutencaoDao {
     }
 
     @Override
-    public void delete(int id, String tipoManutencao, String descricao, String dataAgendamentoManutencao, int horarioAgendamentoManutencao, String enderecoCentroAutomotivo) throws SQLException {
-        String sql = "DELETE T_VB_MANUTENCAO WHERE id=?, tipoManutencao=?, descricao=?, dataAgendamentoManutencao=?, horarioAgendamentoManutencao=?, enderecoCentroAutomotivo=?";
+    public void delete(int id) throws SQLException {
+        String sql = "DELETE T_VB_MANUTENCAO WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
-        pstmt.setString(2, tipoManutencao);
-        pstmt.setString(3, descricao);
-        pstmt.setString(4, dataAgendamentoManutencao);
-        pstmt.setInt(5, horarioAgendamentoManutencao);
-        pstmt.setString(6, enderecoCentroAutomotivo);
 
         pstmt.executeUpdate();
     }
 
+    @Override
+    public Manutencao findId(int id) throws SQLException {
+        Manutencao manutencaoEncontrada = null;
+        List<Manutencao> result = new ArrayList<>();
+        String sql = "SELECT * FROM T_VB_AUTOMOVEL WHERE id=?";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
 
+        if (rs.next()) {
+            String tipoManutencao = rs.getString("tipoManutencao");
+            String descricao = rs.getString("descricao");
+            String dataAgendamentoManutencao = rs.getString("dataAgendamentoManutencao");
+            int horarioAgendamentoManutencao = rs.getInt("horarioAgendamentoManutencao");
+            String enderecoCentroAutomotivo = rs.getString("enderecoCentroAutomotivo");
+
+            manutencaoEncontrada = new Manutencao(id, tipoManutencao, descricao, dataAgendamentoManutencao, horarioAgendamentoManutencao, enderecoCentroAutomotivo);
+
+        }
+        return manutencaoEncontrada;
+
+    }
 }
