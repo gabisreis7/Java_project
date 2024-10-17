@@ -16,7 +16,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     @Override
     public void create(Automovel automovel) throws SQLException {
-        String sql = "INSERT INTO T_VB_AUTOMOVEL(placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavam, anoAutomovel, porteAutomovel) " +
+        String sql = "INSERT INTO T_AUTOMOVEL(placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavam, anoAutomovel, porteAutomovel) " +
                 "VALUES (?,?,?,?,?,?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, automovel.getPlacaAutomovel());
@@ -33,7 +33,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
     @Override
     public List<Automovel> read() throws SQLException {
         List<Automovel> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_VB_AUTOMOVEL";
+        String sql = "SELECT * FROM T_AUTOMOVEL";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -54,7 +54,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     @Override
     public void update(Automovel automovel) throws SQLException {
-        String sql = "UPDATE T_VB_AUTOMOVEL SET PLACAAUTOMOVEL=?, MARCAAUTOMOVEL=?, MODELOAUTOMOVEL=?, NUMEROCHASSI=?, CODIGORENAVAM=?, ANOAUTOMOVEL=?,PORTEAUTOMOVEL=? ";
+        String sql = "UPDATE T_AUTOMOVEL SET id=?, placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=? ";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, automovel.getPlacaAutomovel());
         pstmt.setString(2, automovel.getMarcaAutomovel());
@@ -73,7 +73,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE T_VB_AUTOMOVEL WHERE id=?";
+        String sql = "DELETE T_AUTOMOVEL WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
 
@@ -84,7 +84,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
     public Automovel findId(int id) throws SQLException {
         Automovel automovelEncontrado = null;
         List<Automovel> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_VB_AUTOMOVEL WHERE id=?";
+        String sql = "SELECT * FROM T_AUTOMOVEL WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
