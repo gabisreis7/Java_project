@@ -10,7 +10,7 @@ public class AutomovelServiceImpl implements AutomovelService{
 
     private final AutomovelDao automovelDao;
 
-    private AutomovelServiceImpl(AutomovelDao automovelDao){
+    public AutomovelServiceImpl(AutomovelDao automovelDao){
         this.automovelDao = automovelDao;
     }
 

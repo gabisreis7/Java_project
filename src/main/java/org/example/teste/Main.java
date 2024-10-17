@@ -1,9 +1,14 @@
 package org.example.teste;
 
 import org.example.ConexaoDbSingleton;
+import org.example.dao.AutomovelDao;
+import org.example.dao.AutomovelDaoImplementado;
 import org.example.dao.ClienteDao;
 import org.example.dao.ClienteDaoImplementado;
+import org.example.entities.Automovel;
 import org.example.entities.Cliente;
+import org.example.service.AutomovelService;
+import org.example.service.AutomovelServiceImpl;
 import org.example.service.ClienteService;
 import org.example.service.ClienteServiceImpl;
 
@@ -85,7 +90,8 @@ public class Main {
 
 
         System.out.println("Informe seu endereço completo: ");
-        cliente.setEndereco(scan.nextLine());
+        endereco = scan.nextLine();
+        cliente.setEndereco(endereco);
 
 
         do {
@@ -101,7 +107,40 @@ public class Main {
         } while (true);
 
             clienteService.cadastrarCliente(cliente);
+            cliente.mostrarRegistroDados();
 
+
+
+        AutomovelDao automovelDao = new AutomovelDaoImplementado(connection);
+        AutomovelService automovelService = new AutomovelServiceImpl(automovelDao);
+
+        Automovel automovel = new Automovel();
+        String placaAutomovel, marcaAutomovel, modeloAutomovel, porteAutomovel;
+        long numeroChassi, codigoRenavam;
+        int anoAutomovel;
+
+
+
+        System.out.println("Cadastro do automóvel: ");
+        System.out.println("Nessa etapa você precisa fornecer os dados do seu automóvel!");
+
+        System.out.println("");
+        do {
+            System.out.println("Informe a placa do veículo: ");
+            try {
+                placaAutomovel = scan.nextLine();
+                automovel.setPlacaAutomovel(placaAutomovel);
+                scan.nextLine();
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + " Por favor, tente novamente...");
+            }
+        } while (true);
+
+
+        System.out.println("Informe a marca montadora: ");
+        marcaAutomovel = scan.nextLine();
+        automovel.setMarcaAutomovel(marcaAutomovel);
 
 
     }

@@ -23,6 +23,11 @@ public class Automovel {
         this.porteAutomovel = porteAutomovel;
     }
 
+    public Automovel() {
+
+    }
+
+
     public int getId() {
         return id;
     }
