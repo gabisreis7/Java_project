@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Seguro {
 
-    private Long id;
-    private String numeroApolice;
+    private int id;
+    private Long numeroApolice;
     private Date dataInicio;
     private Date dataFim;
 
-    public Seguro(Date dataFim, Date dataInicio, Long id, String numeroApolice) {
+    public Seguro(Date dataFim, Date dataInicio, int id, Long numeroApolice) {
         this.dataFim = dataFim;
         this.dataInicio = dataInicio;
         this.id = id;
@@ -32,15 +32,15 @@ public class Seguro {
         this.dataInicio = dataInicio;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getNumeroApolice() {
+    public Long getNumeroApolice() {
         return numeroApolice;
     }
 
