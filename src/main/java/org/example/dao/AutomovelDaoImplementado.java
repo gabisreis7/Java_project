@@ -54,7 +54,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     @Override
     public void update(Automovel automovel) throws SQLException {
-        String sql = "UPDATE AUTOMOVEL SET id=?, placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=? WHERE id=?";
+        String sql = "UPDATE AUTOMOVEL SET placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=? WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(2, automovel.getPlacaAutomovel());
         pstmt.setString(3, automovel.getMarcaAutomovel());
