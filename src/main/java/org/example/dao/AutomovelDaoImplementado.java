@@ -16,29 +16,29 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     @Override
     public void create(Automovel automovel) throws SQLException {
-        String sql = "INSERT INTO T_AUTOMOVEL(placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavam, anoAutomovel, porteAutomovel) " +
-                "VALUES (?,?,?,?,?,?,?)";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setString(1, automovel.getPlacaAutomovel());
-        pstmt.setString(2, automovel.getMarcaAutomovel());
-        pstmt.setString(3, automovel.getModeloAutomovel());
-        pstmt.setLong(4, automovel.getNumeroChassi());
-        pstmt.setLong(5, automovel.getCodigoRenavam());
-        pstmt.setInt(6, automovel.getAnoAutomovel());
-        pstmt.setString(7, automovel.getPorteAutomovel());
-        pstmt.executeUpdate();
+        String sql = "INSERT INTO AUTOMOVEL(placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavam, anoAutomovel, porteautomovel) VALUES (?,?,?,?,?,?,?)";
 
-    }
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, automovel.getPlacaAutomovel());       // Placa (2)
+            pstmt.setString(2, automovel.getMarcaAutomovel());       // Marca (3)
+            pstmt.setString(3, automovel.getModeloAutomovel());      // Modelo (4)
+            pstmt.setLong(4, automovel.getNumeroChassi());           // Número do Chassi (5)
+            pstmt.setLong(5, automovel.getCodigoRenavam());          // Código Renavam (6)
+            pstmt.setInt(6, automovel.getAnoAutomovel());            // Ano do Automóvel (7)
+            pstmt.setString(7, automovel.getPorteAutomovel());       // Porte do Automóvel (8)
+            pstmt.executeUpdate();  // Executa a inserção
+        }
 
     @Override
     public List<Automovel> read() throws SQLException {
         List<Automovel> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_AUTOMOVEL";
+        String sql = "SELECT * FROM AUTOMOVEL";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
         while(rs.next()){
+            int id = rs.getInt("id");
             String placaAutomovel = rs.getString("placaAutomovel");
             String marcaAutomovel = rs.getString("marcaAutomovel");
             String modeloAutomovel = rs.getString("modeloAutomovel");
@@ -46,34 +46,30 @@ public class AutomovelDaoImplementado implements AutomovelDao{
             Long codigoRenavem = rs.getLong("codigoRenavam");
             int anoAutomovel = rs.getInt("anoAutomovel");
             String porteAutomovel = rs.getString("porteAutomovel");
+            result.add(new Automovel(id, placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavem, anoAutomovel, porteAutomovel));
 
         }
         return result;
     }
 
-
     @Override
     public void update(Automovel automovel) throws SQLException {
-        String sql = "UPDATE T_AUTOMOVEL SET id=?, placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=? ";
+        String sql = "UPDATE AUTOMOVEL SET id=?, placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setString(1, automovel.getPlacaAutomovel());
-        pstmt.setString(2, automovel.getMarcaAutomovel());
-        pstmt.setString(3, automovel.getModeloAutomovel());
-        pstmt.setLong(4, automovel.getNumeroChassi());
-        pstmt.setLong(5, automovel.getCodigoRenavam());
-        pstmt.setInt(6, automovel.getAnoAutomovel());
-        pstmt.setString(7, automovel.getPorteAutomovel());
+        pstmt.setString(2, automovel.getPlacaAutomovel());
+        pstmt.setString(3, automovel.getMarcaAutomovel());
+        pstmt.setString(4, automovel.getModeloAutomovel());
+        pstmt.setLong(5, automovel.getNumeroChassi());
+        pstmt.setLong(6, automovel.getCodigoRenavam());
+        pstmt.setInt(7, automovel.getAnoAutomovel());
+        pstmt.setString(8, automovel.getPorteAutomovel());
         pstmt.executeUpdate();
-
-
-
-
 
     }
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE T_AUTOMOVEL WHERE id=?";
+        String sql = "DELETE AUTOMOVEL WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
 
@@ -83,8 +79,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
     @Override
     public Automovel findId(int id) throws SQLException {
         Automovel automovelEncontrado = null;
-        List<Automovel> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_AUTOMOVEL WHERE id=?";
+        String sql = "SELECT * FROM AUTOMOVEL WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
@@ -104,6 +99,5 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
         return automovelEncontrado;
     }
-
 
 }

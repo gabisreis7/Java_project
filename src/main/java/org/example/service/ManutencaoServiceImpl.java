@@ -28,6 +28,9 @@ public class ManutencaoServiceImpl implements ManutencaoService{
     @Override
     public void atualizarManutencao(Manutencao manutencao) throws SQLException {
         Manutencao manutencaoAtualizada = this.manutencaoDao.findId(manutencao.getId());
+        manutencaoAtualizada.setDataAgendamentoManutencao(manutencao.getDataAgendamentoManutencao());
+        manutencaoAtualizada.setHorarioAgendamentoManutencao(manutencao.getHorarioAgendamentoManutencao());
+        manutencaoAtualizada.setEnderecoCentroAutomotivo(manutencao.getEnderecoCentroAutomotivo());
         this.manutencaoDao.update(manutencaoAtualizada);
 
 

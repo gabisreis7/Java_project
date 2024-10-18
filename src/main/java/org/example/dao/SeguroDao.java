@@ -13,4 +13,6 @@ public interface SeguroDao {
     void update(Seguro seguro) throws SQLException;
 
     void delete(int id) throws SQLException;
+
+    Seguro findId(int id) throws SQLException;
 }

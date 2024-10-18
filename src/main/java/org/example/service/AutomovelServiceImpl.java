@@ -17,7 +17,7 @@ public class AutomovelServiceImpl implements AutomovelService{
 
     @Override
     public void salvarAutomovel(Automovel automovel) throws SQLException {
-        automovelDao.create(automovel);
+        this.automovelDao.create(automovel);
     }
 
     @Override
@@ -29,6 +29,11 @@ public class AutomovelServiceImpl implements AutomovelService{
     public void atualizarAutomovel(Automovel automovel) throws SQLException {
         Automovel automovelAtualizado = this.automovelDao.findId(automovel.getId());
         automovelAtualizado.setPlacaAutomovel(automovel.getPlacaAutomovel());
+        automovelAtualizado.setMarcaAutomovel(automovel.getMarcaAutomovel());
+        automovelAtualizado.setNumeroChassi(automovel.getNumeroChassi());
+        automovelAtualizado.setCodigoRenavam(automovel.getCodigoRenavam());
+        automovelAtualizado.setAnoAutomovel(automovel.getAnoAutomovel());
+        automovelAtualizado.setPorteAutomovel(automovel.getPorteAutomovel());
         this.automovelDao.update(automovelAtualizado);
     }
 
