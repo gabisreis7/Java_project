@@ -16,7 +16,7 @@ public class ProblemaDaoImplementado implements ProblemaDao {
 
         @Override
         public void create(Problema problema) throws SQLException {
-            String sql = "INSERT INTO T_PROBLEMA(tipoProblema, descricaoProblema, gravidadeProblema) VALUES (?,?,?)";
+            String sql = "INSERT INTO PROBLEMA(tipoProblema, descricaoProblema, gravidadeProblema) VALUES (?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, problema.getTipoProblema());
             pstmt.setString(2, problema.getDescricaoProblema());
@@ -27,7 +27,7 @@ public class ProblemaDaoImplementado implements ProblemaDao {
         @Override
         public List<Problema> read() throws SQLException {
             List<Problema> result = new ArrayList<>();
-            String sql = "SELECT * FROM T_PROBLEMA";
+            String sql = "SELECT * FROM PROBLEMA";
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -44,7 +44,7 @@ public class ProblemaDaoImplementado implements ProblemaDao {
 
         @Override
         public void update(Problema problema) throws SQLException {
-            String sql = "UPDATE T_PROBLEMA SET id=?, tipoProblema=?, descricaoProblema=?, gravidadeProblema=? WHERE tipoProblema=?";
+            String sql = "UPDATE PROBLEMA SET tipoProblema=?, descricaoProblema=?, gravidadeProblema=? WHERE id=?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, problema.getTipoProblema());
             pstmt.setString(2, problema.getDescricaoProblema());
@@ -54,7 +54,7 @@ public class ProblemaDaoImplementado implements ProblemaDao {
 
         @Override
         public void delete(int id) throws SQLException {
-            String sql = "DELETE T_PROBLEMA WHERE id=?";
+            String sql = "DELETE PROBLEMA WHERE id=?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -63,7 +63,7 @@ public class ProblemaDaoImplementado implements ProblemaDao {
     @Override
     public Problema findId(int id) throws SQLException {
             Problema problemaEncontrado = null;
-            String sql = "SELECT * FROM T_PROBLEMA WHERE id=?";
+            String sql = "SELECT * FROM PROBLEMA WHERE id=?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();

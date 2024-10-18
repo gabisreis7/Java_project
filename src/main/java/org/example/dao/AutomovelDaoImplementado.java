@@ -19,14 +19,14 @@ public class AutomovelDaoImplementado implements AutomovelDao{
         String sql = "INSERT INTO AUTOMOVEL(placaAutomovel, marcaAutomovel, modeloAutomovel, numeroChassi, codigoRenavam, anoAutomovel, porteautomovel) VALUES (?,?,?,?,?,?,?)";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, automovel.getPlacaAutomovel());       // Placa (2)
-            pstmt.setString(2, automovel.getMarcaAutomovel());       // Marca (3)
-            pstmt.setString(3, automovel.getModeloAutomovel());      // Modelo (4)
-            pstmt.setLong(4, automovel.getNumeroChassi());           // Número do Chassi (5)
-            pstmt.setLong(5, automovel.getCodigoRenavam());          // Código Renavam (6)
-            pstmt.setInt(6, automovel.getAnoAutomovel());            // Ano do Automóvel (7)
-            pstmt.setString(7, automovel.getPorteAutomovel());       // Porte do Automóvel (8)
-            pstmt.executeUpdate();  // Executa a inserção
+            pstmt.setString(1, automovel.getPlacaAutomovel());
+            pstmt.setString(2, automovel.getMarcaAutomovel());
+            pstmt.setString(3, automovel.getModeloAutomovel());
+            pstmt.setLong(4, automovel.getNumeroChassi());
+            pstmt.setLong(5, automovel.getCodigoRenavam());
+            pstmt.setInt(6, automovel.getAnoAutomovel());
+            pstmt.setString(7, automovel.getPorteAutomovel());
+            pstmt.executeUpdate();
         }
 
     @Override
@@ -54,7 +54,7 @@ public class AutomovelDaoImplementado implements AutomovelDao{
 
     @Override
     public void update(Automovel automovel) throws SQLException {
-        String sql = "UPDATE AUTOMOVEL SET id=?, placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=?";
+        String sql = "UPDATE AUTOMOVEL SET id=?, placaAutomovel=?, marcaAutomovel=?, modeloAutomovel=?, numeroChassi=?, codigoRenavam=?, anoAutomovel=?, porteAutomovel=? WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(2, automovel.getPlacaAutomovel());
         pstmt.setString(3, automovel.getMarcaAutomovel());
