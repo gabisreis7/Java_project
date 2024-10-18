@@ -57,7 +57,7 @@ public class ClienteDaoImplementado implements ClienteDao{
 
     @Override
     public void update(Cliente cliente) throws SQLException {
-        String sql = "UPDATE CLIENTE SET id=?, nome=?, idade=?, email=?, senha=?, numeroCpf=?, numeroRg=?, endereco=?, numeroCnh=?";
+        String sql = "UPDATE CLIENTE SET nome=?, idade=?, email=?, senha=?, numeroCpf=?, numeroRg=?, endereco=?, numeroCnh=? WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(2, cliente.getNome());
         pstmt.setInt(3, cliente.getIdade());
