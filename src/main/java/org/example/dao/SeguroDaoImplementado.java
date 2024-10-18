@@ -16,51 +16,62 @@ public class SeguroDaoImplementado implements SeguroDao {
 
     @Override
     public void create(Seguro seguro) throws SQLException {
-        String sql = "INSERT INTO T_VB_SEGURO(id, numeroApolice, dataInicio, dataFim) " +
-                "VALUES (?,?,?,?)";
+        String sql = "INSERT INTO T_SEGURO(numeroApolice, vigencia) " +
+                "VALUES (?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setLong(1, seguro.getId());
-        pstmt.setLong(2, seguro.getNumeroApolice());
-        pstmt.setDate(3, new java.sql.Date(seguro.getDataInicio().getTime()));
-        pstmt.setDate(4, new java.sql.Date(seguro.getDataFim().getTime()));
+        pstmt.setLong(1, seguro.getNumeroApolice());
+        pstmt.setString(2, seguro.getVigencia());
         pstmt.executeUpdate();
     }
 
     @Override
     public List<Seguro> read() throws SQLException {
         List<Seguro> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_VB_SEGURO";
+        String sql = "SELECT * FROM T_SEGURO";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
         while (rs.next()) {
             int id = rs.getInt("id");
-            String numeroApolice = rs.getString("numeroApolice");
-            Date dataInicio = rs.getDate("dataInicio");
-            Date dataFim = rs.getDate("dataFim");
-
-            Seguro seguro = new Seguro(id, numeroApolice, dataInicio, dataFim);
-            result.add(seguro);
+            Long numeroApolice = rs.getLong("numeroApolice");
+            String vigencia = rs.getString("vigencia");
+            result.add(new Seguro(id, numeroApolice, vigencia));
         }
         return result;
     }
 
     @Override
     public void update(Seguro seguro) throws SQLException {
-        String sql = "UPDATE T_VB_SEGURO SET numeroApolice=?, dataInicio=?, dataFim=? WHERE id=?";
+        String sql = "UPDATE T_SEGURO SET numeroApolice=?, vigencia=?  WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setLong(1, seguro.getNumeroApolice());
-        pstmt.setDate(2, new java.sql.Date(seguro.getDataInicio().getTime()));
-        pstmt.setDate(3, new java.sql.Date(seguro.getDataFim().getTime()));
-        pstmt.setLong(4, seguro.getId());
+        pstmt.setString(2, seguro.getVigencia());
         pstmt.executeUpdate();
     }
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE T_VB_SEGURO WHERE id=?";
+        String sql = "DELETE T_SEGURO WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setInt(1, id);    pstmt.executeUpdate();
+        pstmt.setInt(1, id);
+        pstmt.executeUpdate();
+    }
+
+    @Override
+    public Seguro findId(int id) throws SQLException {
+        Seguro seguroEncontrado = null;
+        String sql = "SELECT * FROM T_SEGURO WHERE id=?";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()){
+            Long numeroApolice = rs.getLong("numeroApolice");
+            String vigencia = rs.getString("vigencia");
+
+            seguroEncontrado = new Seguro(id, numeroApolice, vigencia);
+        }
+        return seguroEncontrado;
     }
 }

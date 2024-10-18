@@ -16,6 +16,10 @@ public class Manutencao {
         this.enderecoCentroAutomotivo = enderecoCentroAutomotivo;
     }
 
+    public Manutencao() {
+
+    }
+
     public int getId() {
         return id;
     }

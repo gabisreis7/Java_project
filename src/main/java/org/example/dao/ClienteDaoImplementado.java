@@ -17,7 +17,7 @@ public class ClienteDaoImplementado implements ClienteDao{
     @Override
     public void create(Cliente cliente) throws SQLException {
 
-        String sql = "INSERT INTO CLIENTE(nome, idade, email, senha, numeroCpf, numeroRg, endereco, numeroCnh) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO CLIENTE(nome, idade, email, senha, numeroCpf, numeroRg, endereco, numeroCnh) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, cliente.getNome());
         pstmt.setInt(2, cliente.getIdade());
@@ -34,7 +34,7 @@ public class ClienteDaoImplementado implements ClienteDao{
     @Override
     public List<Cliente> read() throws SQLException {
         List<Cliente> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_CLIENTE";
+        String sql = "SELECT * FROM CLIENTE";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -57,7 +57,7 @@ public class ClienteDaoImplementado implements ClienteDao{
 
     @Override
     public void update(Cliente cliente) throws SQLException {
-        String sql = "UPDATE T_CLIENTE SET id=?, nome=?, idade=?, email=?, senha=?, numeroCpf=?, numeroRg=?, endereco=?, numeroCnh=?";
+        String sql = "UPDATE CLIENTE SET id=?, nome=?, idade=?, email=?, senha=?, numeroCpf=?, numeroRg=?, endereco=?, numeroCnh=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(2, cliente.getNome());
         pstmt.setInt(3, cliente.getIdade());
@@ -74,7 +74,7 @@ public class ClienteDaoImplementado implements ClienteDao{
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE T_CLIENTE WHERE id=?";
+        String sql = "DELETE CLIENTE WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
 
@@ -84,7 +84,7 @@ public class ClienteDaoImplementado implements ClienteDao{
     @Override
     public Cliente findId(int id) throws SQLException {
         Cliente clienteEncontrado = null;
-        String sql = "SELECT * FROM T_CLIENTE WHERE id=?";
+        String sql = "SELECT * FROM CLIENTE WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
