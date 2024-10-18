@@ -30,7 +30,7 @@ public class ManutencaoDaoImplSingleton implements ManutencaoDao {
 
     @Override
     public void create(Manutencao manutencao) throws SQLException {
-        String sql = "INSERT INTO T_MANUTENCAO(dataAgendamentoManutencao, horarioAgendamentoManutencao, enderecoCentroAutomotivo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO MANUTENCAO(dataAgendamentoManutencao, horarioAgendamentoManutencao, enderecoCentroAutomotivo) VALUES (?,?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, manutencao.getDataAgendamentoManutencao());
         pstmt.setInt(2, manutencao.getHorarioAgendamentoManutencao());
@@ -41,7 +41,7 @@ public class ManutencaoDaoImplSingleton implements ManutencaoDao {
     @Override
     public List<Manutencao> read() throws SQLException {
         List<Manutencao> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_MANUTENCAO";
+        String sql = "SELECT * FROM MANUTENCAO";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -59,7 +59,7 @@ public class ManutencaoDaoImplSingleton implements ManutencaoDao {
 
     @Override
     public void update(Manutencao manutencao) throws SQLException {
-        String sql = "UPDATE T_MANUTENCAO SET id=?, dataAgendamentoManutencao=?, horarioAgendamentoManutencao=?, enderecoCentroAutomotivo=?";
+        String sql = "UPDATE MANUTENCAO SET dataAgendamentoManutencao=?, horarioAgendamentoManutencao=?, enderecoCentroAutomotivo=? WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, manutencao.getDataAgendamentoManutencao());
         pstmt.setInt(2, manutencao.getHorarioAgendamentoManutencao());
@@ -70,7 +70,7 @@ public class ManutencaoDaoImplSingleton implements ManutencaoDao {
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE T_MANUTENCAO WHERE id=?";
+        String sql = "DELETE MANUTENCAO WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
 
@@ -80,7 +80,7 @@ public class ManutencaoDaoImplSingleton implements ManutencaoDao {
     @Override
     public Manutencao findId(int id) throws SQLException {
         Manutencao manutencaoEncontrada = null;
-        String sql = "SELECT * FROM T_MANUTENCAO WHERE id=?";
+        String sql = "SELECT * FROM MANUTENCAO WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();

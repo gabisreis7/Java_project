@@ -6,7 +6,6 @@ import org.example.entities.*;
 import org.example.service.*;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -30,7 +29,7 @@ public class Main {
         System.out.println("");
         System.out.println("Cadastro Pessoal");
         System.out.println("Preencha seus dados pessoais");
-
+        System.out.println("");
         System.out.println("Informe seu nome completo: ");
         nome = scan.nextLine();
         cliente.setNome(nome);
@@ -124,7 +123,6 @@ public class Main {
             try {
                 placaAutomovel = scan.nextLine();
                 automovel.setPlacaAutomovel(placaAutomovel);
-                scan.nextLine();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + " Por favor, tente novamente...");
@@ -156,14 +154,15 @@ public class Main {
         System.out.println("Informe o ano de fabricação: ");
         anoAutomovel = scan.nextInt();
         automovel.setAnoAutomovel(anoAutomovel);
+        scan.nextLine();
         System.out.println("Informe o porte do automóvel: ");
-        porteAutomovel = scan.nextLine();
-        automovel.setPorteAutomovel(porteAutomovel);
+        automovel.setPorteAutomovel(scan.nextLine());
 
 
         automovelService.salvarAutomovel(automovel);
         automovel.mostrarCadastroAutomovel();
 
+        System.out.println("");
         System.out.println("Perfeito, seu cadastro foi realizado com sucesso!");
         System.out.println("Agora, precisamos que você forneça os dados do Seguro para que realizemos o serviço mecânico:");
 
@@ -210,8 +209,9 @@ public class Main {
 
 
         System.out.println("Parabéns! Seu cadastro foi 100% concluído");
+        System.out.println("");
         System.out.println("Bom, agora você poderá realizar sua consulta de manutenção automotiva!");
-
+        System.out.println("");
         System.out.println("Para podermos te ajudar você precisa informar o problema mecânico do seu automóvel e assim marcaremos a manutenção e revisão.");
 
         System.out.println("Qual é o tipo de problema que está ameaçando a saúde automotiva de seu veículo? ");
@@ -264,19 +264,27 @@ public class Main {
         enderecoCentroAutomotivo = scan.nextLine();
         manutencao.setEnderecoCentroAutomotivo(enderecoCentroAutomotivo);
 
-        System.out.println("Informe a data de agendamento para o agendamento: ");
-        dataAgendamentoManutencao = scan.nextLine();
-        manutencao.setDataAgendamentoManutencao(dataAgendamentoManutencao);
-        manutencao.validarAgendamento();
+
+
+            System.out.println("Informe a data de agendamento para o agendamento: ");
+            dataAgendamentoManutencao = scan.nextLine();
+            manutencao.setDataAgendamentoManutencao(dataAgendamentoManutencao);
+
 
         System.out.println("Informe o horário da manutenção (dentro do horário comercial 9-18hrs: ");
         horarioAgendamentoManutencao = scan.nextInt();
         manutencao.setHorarioAgendamentoManutencao(horarioAgendamentoManutencao);
 
         manutencaoService.agendarManutencao(manutencao);
+        manutencao.mostrarAgendamento();
 
 
-
+        System.out.println("Agendamento realizado com sucesso!!!");
+        System.out.println("");
+        System.out.println("O serviço de manutenção altamente qualificado garantirá a persistência da saúde automotivo do seu veículo");
+        System.out.println("Caso precise de outro agendamento, realize o procedimento no sistema");
+        System.out.println("");
+        System.out.println("Conte sempre com a Mecânica Segura, seu serviço exclusivo de manutenção mecânica");
     }
 
 }

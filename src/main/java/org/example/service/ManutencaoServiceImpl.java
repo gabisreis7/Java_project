@@ -16,7 +16,6 @@ public class ManutencaoServiceImpl implements ManutencaoService{
 
     @Override
     public void agendarManutencao(Manutencao manutencao) throws Exception {
-        manutencao.validarAgendamento();
         this.manutencaoDao.create(manutencao);
     }
 

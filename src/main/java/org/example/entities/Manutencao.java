@@ -33,7 +33,8 @@ public class Manutencao {
     }
 
     public void setDataAgendamentoManutencao(String dataAgendamentoManutencao) {
-        this.dataAgendamentoManutencao = dataAgendamentoManutencao;
+            this.dataAgendamentoManutencao = dataAgendamentoManutencao;
+
     }
 
 
@@ -53,13 +54,14 @@ public class Manutencao {
         this.horarioAgendamentoManutencao = horarioAgendamentoManutencao;
     }
 
+    public void mostrarAgendamento(){
+        System.out.println("Confirmação de agendamento: ");
+        System.out.println("Centro Automotivo: " + getEnderecoCentroAutomotivo());
+        System.out.println("Data de agendamento: " + getDataAgendamentoManutencao());
+        System.out.println("Horário de agendamento: " + getHorarioAgendamentoManutencao());
+    }
 
-    public void validarAgendamento() throws Exception {
-        LocalDate hoje = LocalDate.now();
-        LocalDate dataAgendada = LocalDate.parse(getDataAgendamentoManutencao());
 
-        if (dataAgendada.isBefore(hoje.plusDays(7))){
-            throw new Exception("A manutenção deve ser agendado em um prazo de 7 dias");
-        }
-        }
+
+
 }

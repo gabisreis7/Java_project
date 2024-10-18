@@ -16,7 +16,7 @@ public class SeguroDaoImplementado implements SeguroDao {
 
     @Override
     public void create(Seguro seguro) throws SQLException {
-        String sql = "INSERT INTO T_SEGURO(numeroApolice, vigencia) " +
+        String sql = "INSERT INTO SEGURO(numeroApolice, vigencia) " +
                 "VALUES (?,?)";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setLong(1, seguro.getNumeroApolice());
@@ -27,7 +27,7 @@ public class SeguroDaoImplementado implements SeguroDao {
     @Override
     public List<Seguro> read() throws SQLException {
         List<Seguro> result = new ArrayList<>();
-        String sql = "SELECT * FROM T_SEGURO";
+        String sql = "SELECT * FROM SEGURO";
 
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -43,7 +43,7 @@ public class SeguroDaoImplementado implements SeguroDao {
 
     @Override
     public void update(Seguro seguro) throws SQLException {
-        String sql = "UPDATE T_SEGURO SET numeroApolice=?, vigencia=?  WHERE id=?";
+        String sql = "UPDATE SEGURO SET numeroApolice=?, vigencia=?  WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setLong(1, seguro.getNumeroApolice());
         pstmt.setString(2, seguro.getVigencia());
@@ -52,7 +52,7 @@ public class SeguroDaoImplementado implements SeguroDao {
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE T_SEGURO WHERE id=?";
+        String sql = "DELETE SEGURO WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         pstmt.executeUpdate();
@@ -61,7 +61,7 @@ public class SeguroDaoImplementado implements SeguroDao {
     @Override
     public Seguro findId(int id) throws SQLException {
         Seguro seguroEncontrado = null;
-        String sql = "SELECT * FROM T_SEGURO WHERE id=?";
+        String sql = "SELECT * FROM SEGURO WHERE id=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
